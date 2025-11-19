@@ -289,3 +289,14 @@ body{
   color: #f97373;
   min-height: 16px;
 }
+
+.export-btn{
+  float:right;
+  margin:10px 0;
+  padding:8px 14px;
+  background:#c40000;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}

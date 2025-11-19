@@ -372,3 +372,28 @@ document.addEventListener("DOMContentLoaded",()=>{
   atualizarDashboard();
   mostrarView("dashboard");
 });
+
+
+// Export functions
+function exportTableToCSV(tableId, filename){
+    const rows = document.querySelectorAll("#"+tableId+" tr");
+    let csv = [];
+    rows.forEach(row=>{
+        let cols = row.querySelectorAll("th, td");
+        let rowData=[];
+        cols.forEach(col=>rowData.push(col.innerText));
+        csv.push(rowData.join(","));
+    });
+    const blob=new Blob([csv.join("\n")],{type:"text/csv"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download=filename; a.click();
+    URL.revokeObjectURL(url);
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    const btnEq=document.getElementById("exportEquipe");
+    if(btnEq) btnEq.onclick=()=>exportTableToCSV("equipe-table","equipe_promocar.csv");
+    const btnPo=document.getElementById("exportPortais");
+    if(btnPo) btnPo.onclick=()=>exportTableToCSV("portais-table","portais_promocar.csv");
+});
